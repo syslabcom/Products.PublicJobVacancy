@@ -1,0 +1,92 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US"
+      lang="en-US"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="plone">
+
+<body>
+
+    <div metal:fill-slot="main" i18n:domain="PublicJobVacancy"
+         tal:define="results python:[]; ">
+
+    <tal:resultlist tal:define="view context/@@jobs_sorted_listing;
+                                resultSet view/results;
+                                plone context/@@plone;
+                                toLocalizedTime nocall:plone/toLocalizedTime">
+
+        <h1 tal:content="here/Title">Job vacancies</h1>
+        
+        <div tal:content="here/Description">description</div>
+
+        <metal:block define-macro="listings"
+            tal:define="current resultSet/current;
+                        ongoing resultSet/ongoing;
+                        shortlisted resultSet/shortlisted;
+                        archive resultSet/archive;
+                        have_results python:(len(current)+len(ongoing)+len(shortlisted))>0">
+
+            <tal:block condition="have_results">
+
+                <h2 i18n:translate="heading_job_vacancies_current">Current job vacancies</h2>
+                <metal:block define-macro="current_jobs">
+                    <tal:block define="results current | nothing" tal:condition="results">
+                        <metal:block use-macro="here/jobs_listing/macros/listing" />
+                    </tal:block>
+                </metal:block>
+
+                <h2 i18n:translate="heading_job_vacancies_ongoing">Ongoing job vacancies</h2>
+                <metal:block define-macro="ongoing_jobs">
+                    <tal:block define="results ongoing | nothing" condition="results">
+                        <metal:block use-macro="here/jobs_listing/macros/listing" />
+                    </tal:block>
+                </metal:block>
+
+                <h2 i18n:translate="heading_job_vacancies_shortlisted">Short-listed job vacancies</h2>
+                <metal:block define-macro="shortlisted_jobs">
+                    <tal:block define="results shortlisted" condition="results">
+                        <metal:block use-macro="here/jobs_listing/macros/listing" />
+                    </tal:block>
+                </metal:block>
+
+            </tal:block>
+
+
+            <p class="bold">
+            <a href="" i18n:translate="link_archive"
+               tal:condition="archive"
+               tal:attributes="href string:${here/absolute_url}/jobs_listing_archive">Closed</a>
+            </p>
+
+        </metal:block>
+
+
+
+        <metal:block define-macro="listing">
+            <dl tal:condition="results">
+                <metal:block tal:repeat="res results">
+                    <tal:block define="robj res/getObject;
+                                        datestr python:toLocalizedTime(robj.EffectiveDate())"
+                          condition="datestr">
+
+                        <dt tal:define="url python:robj.absolute_url()">
+                        <div style="background: transparent url('/icon_press.gif') 0 0 no-repeat; padding-left: 20px">
+                        <a href="#" tal:attributes="href url"
+                                    tal:content="datestr" />: <span tal:replace="robj/Title|robj/title_or_id" /></div>
+                        </dt>
+
+                        <dd>
+                            <div tal:content="structure python:test(robj.Description(), robj.Description(), '&nbsp;')"> description </div>
+                        </dd>
+                    </tal:block>
+                </metal:block>
+            </dl>
+        </metal:block>
+
+      <div tal:define="additionalText view/getAdditionalText" tal:condition="additionalText"
+            tal:content="structure additionalText" >additional Text</div>
+
+      </tal:resultlist>
+      
+    </div>
+
+</body>
+</html>

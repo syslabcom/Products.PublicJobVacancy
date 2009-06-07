@@ -1,0 +1,12 @@
+Products.PublicJobVacancy Changelog
+===================================
+
+Products.PublicJobVacancy 1.1 (2009-05-12)
+------------------------------------------
+
+- Packaged egg (pilz)
+
+Products.PublicJobVacancy 1.0 (2008-03-31)
+------------------------------------------
+
+- Initial port

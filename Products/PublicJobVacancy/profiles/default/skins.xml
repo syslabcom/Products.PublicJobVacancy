@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+
+<object name="portal_skins"
+        meta_type="Plone Skins Tool"
+        allow_any="False"
+        cookie_persistence="False"
+        request_varname="plone_skin">
+
+ <object name="publicjobvacancy_templates"
+         meta_type="Filesystem Directory View"
+         directory="PublicJobVacancy/skins/publicjobvacancy_templates"/>
+ <object name="publicjobvacancy_styles"
+         meta_type="Filesystem Directory View"
+         directory="PublicJobVacancy/skins/publicjobvacancy_styles"/>
+ <object name="publicjobvacancy_images"
+         meta_type="Filesystem Directory View"
+         directory="PublicJobVacancy/skins/publicjobvacancy_images"/>
+ 
+ <skin-path name="Plone Default">
+  <layer insert-after="custom" 
+         name="publicjobvacancy_templates"/>
+  <layer insert-after="custom" 
+         name="publicjobvacancy_styles"/>
+  <layer insert-after="custom" 
+         name="publicjobvacancy_images"/>
+ </skin-path>
+
+</object>
