@@ -9,21 +9,32 @@ slows down test runner startup.
 from Testing import ZopeTestCase as ztc
 from Products.PloneTestCase import PloneTestCase as ptc
 
-ztc.installProduct('PublicJobVacancy')
 
-ptc.setupPloneSite(products=['PublicJobVacancy'])
+from Products.Five import fiveconfigure, zcml
+from Products.PloneTestCase import layer
+
+SiteLayer = layer.PloneSite
+
+class JobVacancyLayer(SiteLayer):
+    @classmethod
+    def setUp(cls):
+        ztc.installProduct('PublicJobVacancy')
+        ptc.setupPloneSite(products=['PublicJobVacancy'])
+        SiteLayer.setUp()
 
 class TestCase(ptc.PloneTestCase):
     """We use this base class for all the tests in this package. If
     necessary, we can put common utility or setup code in here. This
     applies to unit test cases.
     """
+    layer = JobVacancyLayer
 
 class FunctionalTestCase(ptc.FunctionalTestCase):
     """We use this class for functional integration tests that use
     doctest syntax. Again, we can put basic common utility or setup
     code in here.
     """
+    layer = JobVacancyLayer
 
     class Session(dict):
         def set(self, key, value):
@@ -32,7 +43,7 @@ class FunctionalTestCase(ptc.FunctionalTestCase):
     def _setup(self):
         ptc.FunctionalTestCase._setup(self)
         self.app.REQUEST['SESSION'] = self.Session()
-        
+
     def afterSetUp(self):
         roles = ('Member', 'Contributor')
         self.portal.portal_membership.addMember('contributor',
