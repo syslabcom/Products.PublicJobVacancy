@@ -49,7 +49,7 @@ And we ensure that we get the friendly logged-in message:
 
 
 Adding a PublicJobVacancy
-===================
+=========================
 
 We add a Case Study and make sure the id is set correctly.
     >>> _ = self.folder.invokeFactory(type_name='PublicJobVacancy', id='mypjv')

@@ -1,6 +1,13 @@
 Products.PublicJobVacancy Changelog
 ===================================
 
+Products.PublicJobVacancy 1.2 (2009-05-19)
+------------------------------------------
+
+- added tests (thomas)
+
+- cleanup (thomas)
+
 Products.PublicJobVacancy 1.1 (2009-05-12)
 ------------------------------------------
 
