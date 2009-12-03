@@ -1,6 +1,11 @@
 Products.PublicJobVacancy Changelog
 ===================================
 
+Products.PublicJobVacancy 1.3 (unreleased)
+------------------------------------------
+
+- Added EUPL license (deroiste)
+
 Products.PublicJobVacancy 1.2 (2009-05-19)
 ------------------------------------------
 
