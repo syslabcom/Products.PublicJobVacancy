@@ -2,17 +2,17 @@ from Products.PublicJobVacancy.browser.interfaces import IJobsListing
 from Products.CMFCore.utils import getToolByName
 
 from zope.interface import implements
-from Products.CMFPlone import utils
+from Products.Five.browser import BrowserView
 from DateTime import DateTime
 from DocumentTemplate import sequence
 from Acquisition import aq_base
 
 
-class JobsSortedListing(utils.BrowserView):
+class JobsSortedListing(BrowserView):
     implements(IJobsListing)
 
     def getAdditionalText(self):
-        context = utils.context(self)
+        context = self.context
         text = ''
         if getattr(aq_base(context), 'content', None):
             content = getattr(context, 'content')
@@ -21,7 +21,7 @@ class JobsSortedListing(utils.BrowserView):
         return text
 
     def results(self):
-        context = utils.context(self)
+        context = self.context
         portal_catalog = getToolByName(context, 'portal_catalog')
         res = portal_catalog({'portal_type':'PublicJobVacancy'
                                    , 'sort_on':'effective'
