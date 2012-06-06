@@ -30,7 +30,6 @@ __docformat__ = 'plaintext'
 
 import logging
 logger = logging.getLogger('PublicJobVacancy: setuphandlers')
-from config import PROJECTNAME
 from config import DEPENDENCIES
 from Products.CMFCore.utils import getToolByName
 ##code-section HEAD
@@ -38,16 +37,17 @@ from Products.SimpleAttachment.setuphandlers import registerImagesFormController
 from Products.SimpleAttachment.setuphandlers import registerAttachmentsFormControllerActions
 ##/code-section HEAD
 
+
 def installGSDependencies(context):
     """Install dependend profiles."""
-    
+
     # XXX Hacky, but works for now. has to be refactored as soon as generic
     # setup allows a more flexible way to handle dependencies.
-    
+
     dependencies = []
     if not dependencies:
         return
-    
+
     site = context.getSite()
     setup_tool = getToolByName(site, 'portal_setup')
     for dependency in dependencies:
@@ -62,9 +62,9 @@ def installGSDependencies(context):
         ]
         importsteps = [s for s in importsteps if s not in excludes]
         for step in importsteps:
-            setup_tool.runImportStep(step) # purging flag here?
+            setup_tool.runImportStep(step)  # purging flag here?
         setup_tool.setImportContext(old_context)
-    
+
     # re-run some steps to be sure the current profile applies as expected
     importsteps = setup_tool.getImportStepRegistry().sortSteps()
     filter = [
@@ -77,29 +77,35 @@ def installGSDependencies(context):
     ]
     importsteps = [s for s in importsteps if s in filter]
     for step in importsteps:
-        setup_tool.runImportStep(step) # purging flag here?
-        
+        setup_tool.runImportStep(step)  # purging flag here?
+
+
 def installQIDependencies(context):
     """This is for old-style products using QuickInstaller"""
     site = context.getSite()
     qi = getToolByName(site, 'portal_quickinstaller')
     for dependency in DEPENDENCIES:
-        if qi.isProductInstalled(dependency):            
+        if qi.isProductInstalled(dependency):
             logger.info("Re-Installing dependency %s:" % dependency)
             qi.reinstallProducts([dependency])
         else:
             logger.info("Installing dependency %s:" % dependency)
             qi.installProducts([dependency])
 
+
 ##code-section FOOT
 def installAttachmentSupport(context):
     """ install attachment handlers """
     site = context.getSite()
     # Set up form controller actions for the widgets to work
-    registerAttachmentsFormControllerActions(site, contentType = 'PublicJobVacancy', template = 'base_edit')
-    registerImagesFormControllerActions(site, contentType = 'PublicJobVacancy', template = 'base_edit')
+    registerAttachmentsFormControllerActions(
+        site, contentType='PublicJobVacancy', template='base_edit')
+    registerImagesFormControllerActions(
+        site, contentType='PublicJobVacancy', template='base_edit')
 
     # Register form controller actions for LinguaPlone translate_item
-    registerAttachmentsFormControllerActions(site, contentType = 'PublicJobVacancy', template = 'translate_item')
-    registerImagesFormControllerActions(site, contentType = 'PublicJobVacancy', template = 'translate_item')
+    registerAttachmentsFormControllerActions(
+        site, contentType='PublicJobVacancy', template='translate_item')
+    registerImagesFormControllerActions(
+        site, contentType='PublicJobVacancy', template='translate_item')
 ##/code-section FOOT

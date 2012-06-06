@@ -11,4 +11,3 @@ class IPublicJobVacancy(Interface):
 
 ##code-section FOOT
 ##/code-section FOOT
-

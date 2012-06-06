@@ -23,10 +23,12 @@ class JobsSortedListing(BrowserView):
     def results(self):
         context = self.context
         portal_catalog = getToolByName(context, 'portal_catalog')
-        res = portal_catalog({'portal_type':'PublicJobVacancy'
-                                   , 'sort_on':'effective'
-                                   , 'Language': 'all'
-                                   , 'sort_order':'reverse'});
+        res = portal_catalog({
+            'portal_type': 'PublicJobVacancy',
+            'sort_on': 'effective',
+            'Language': 'all',
+            'sort_order': 'reverse'
+        })
         effRes = list()
         cres = list()
         ores = list()
@@ -39,15 +41,17 @@ class JobsSortedListing(BrowserView):
                 o = r.getObject()
             except:
                 continue
-            pastEffective = ( r.effective is None or r.effective=='' or r.effective <= date )
-            beforeExpiration = ( r.expires is None or r.expires=='' or r.expires >= date )
+            pastEffective = (r.effective is None or r.effective == ''
+                             or r.effective <= date)
+            beforeExpiration = (r.expires is None or r.expires == ''
+                                 or r.expires >= date)
             if r.effective is None and r.expires is None:
                 continue
 
             if pastEffective:
                 if beforeExpiration:
                     effRes.append(r)
-                    if o.deadline>date:
+                    if o.deadline > date:
                         cres.append(r)
                     else:
                         if not o.getShortlisted():
@@ -56,10 +60,13 @@ class JobsSortedListing(BrowserView):
                             sres.append(r)
                 else:
                     ares.append(r)
-        cres = sequence.sort(cres, (('effective', 'cmp', 'desc'), ('CreationDate', 'cmp', 'desc')))
-        ores = sequence.sort(ores, (('effective', 'cmp', 'desc'), ('CreationDate', 'cmp', 'desc')))
-        sres = sequence.sort(sres, (('effective', 'cmp', 'desc'), ('CreationDate', 'cmp', 'desc')))
-        return dict(current=cres, 
+        cres = sequence.sort(cres, (('effective', 'cmp', 'desc'),
+                                    ('CreationDate', 'cmp', 'desc')))
+        ores = sequence.sort(ores, (('effective', 'cmp', 'desc'),
+                                    ('CreationDate', 'cmp', 'desc')))
+        sres = sequence.sort(sres, (('effective', 'cmp', 'desc'),
+                                    ('CreationDate', 'cmp', 'desc')))
+        return dict(current=cres,
                     ongoing=ores,
-                    shortlisted=sres, 
+                    shortlisted=sres,
                     archive=ares)

@@ -24,8 +24,8 @@ from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.PublicJobVacancy.config import *
 
-from Products.RichDocument.content.richdocument import RichDocument, RichDocumentSchema as BaseSchema
-from Acquisition import aq_base, aq_parent, aq_base
+from Products.RichDocument.content.richdocument import RichDocument
+from Products.RichDocument.content.richdocument import RichDocumentSchema as BaseSchema
 from Products.ATContentTypes.content.schemata import finalizeATCTSchema
 
 if HAS_LINGUAPLONE:
@@ -42,7 +42,8 @@ schema = Schema((
         widget=StringWidget(
             size=80,
             label=_(u'job_author_label', default=u"Author"),
-            description=_(u'job_author_description', u"The author issuing the job"),
+            description=_(u'job_author_description',
+                          u"The author issuing the job"),
         )
     ),
 
@@ -51,7 +52,8 @@ schema = Schema((
         widget=CalendarWidget(
             size="CalendarWidget",
             label=_(u'job_deadline_label', default="Deadline"),
-            description=_(u'job_deadline_description', default=u"The deadline for this job vacancy"),
+            description=_(u'job_deadline_description',
+                          default=u"The deadline for this job vacancy"),
         ),
         languageIndependent=True
     ),
@@ -60,7 +62,8 @@ schema = Schema((
         name='shortlisted',
         widget=BooleanField._properties['widget'](
             label=_(u'job_shortlisted_label', default=u"Shortlisted"),
-            description=_(u'job_shortlisted_description', default=u"Has this job vacancy been shortlisted?"),
+            description=_(u'job_shortlisted_description',
+                          default=u"Has this job vacancy been shortlisted?"),
         ),
         languageIndependent=True
     ),
@@ -100,6 +103,3 @@ registerType(PublicJobVacancy, PROJECTNAME)
 
 ##code-section module-footer #fill in your manual code here
 ##/code-section module-footer
-
-
-
