@@ -32,8 +32,6 @@ long_description = (
     '********\n'
     )
 
-tests_require=['zope.testing']
-
 setup(name='Products.PublicJobVacancy',
       version=version,
       description="Job Vacancy contenttype",
@@ -45,7 +43,7 @@ setup(name='Products.PublicJobVacancy',
         'Topic :: Software Development :: Libraries :: Python Modules',
         "License :: OSI Approved :: GNU General Public License (GPL)",
         "License :: OSI Approved :: European Union Public Licence 1.1 (EUPL 1.1)",
-        ],
+      ],
       keywords='contenttype Job vacancy OSHA',
       author='Syslab.com GmbH',
       author_email='mailto:info@syslab.com',
@@ -55,14 +53,18 @@ setup(name='Products.PublicJobVacancy',
       namespace_packages=['Products', ],
       include_package_data=True,
       zip_safe=False,
-      install_requires=['setuptools',
-                        # -*- Extra requirements: -*-
-                        ],
-      tests_require=tests_require,
-      extras_require=dict(tests=tests_require),
-      test_suite = 'Products.PublicJobVacancy.tests.test_docs.test_suite',
+      install_requires=[
+          'setuptools',
+          # -*- Extra requirements: -*-
+      ],
+      extras_require={
+          'test': [
+              'plone.app.testing',
+              'mock',
+          ],
+      },
       entry_points="""
-      # -*- entry_points -*- 
+      # -*- entry_points -*-
       """,
-      paster_plugins = ["ZopeSkel"],
+      paster_plugins=["ZopeSkel"],
       )

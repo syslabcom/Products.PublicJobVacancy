@@ -1,51 +1,47 @@
-"""Test setup for integration and functional tests.
-
-When we import PloneTestCase and then call setupPloneSite(), all of
-Plone's products are loaded, and a Plone site will be created. This
-happens at module level, which makes it faster to run each test, but
-slows down test runner startup.
-"""
-
-from Testing import ZopeTestCase as ztc
-from Products.PloneTestCase import PloneTestCase as ptc
+from plone.app.testing import FunctionalTesting
+from plone.app.testing import IntegrationTesting
+from plone.app.testing import PLONE_FIXTURE
+from plone.app.testing import PloneSandboxLayer
+from plone.app.testing import applyProfile
+from plone.testing import z2
 
 
-from Products.Five import fiveconfigure, zcml
-from Products.PloneTestCase import layer
+class PublicJobVacancy(PloneSandboxLayer):
 
-SiteLayer = layer.PloneSite
+    defaultBases = (PLONE_FIXTURE,)
 
-class JobVacancyLayer(SiteLayer):
-    @classmethod
-    def setUp(cls):
-        ztc.installProduct('PublicJobVacancy')
-        ptc.setupPloneSite(products=['PublicJobVacancy'])
-        SiteLayer.setUp()
+    def setUpZope(self, app, configurationContext):
+        import osha.policy.browser
+        self.loadZCML('configure.zcml', package=osha.policy.browser)
+        import Products.SimpleAttachment
+        self.loadZCML('configure.zcml', package=Products.SimpleAttachment)
+        import Products.RichDocument
+        self.loadZCML('configure.zcml', package=Products.RichDocument)
+        import Products.PublicJobVacancy
+        self.loadZCML('configure.zcml', package=Products.PublicJobVacancy)
 
-class TestCase(ptc.PloneTestCase):
-    """We use this base class for all the tests in this package. If
-    necessary, we can put common utility or setup code in here. This
-    applies to unit test cases.
-    """
-    layer = JobVacancyLayer
+        z2.installProduct(app, 'Products.SimpleAttachment')
+        z2.installProduct(app, 'Products.RichDocument')
+        z2.installProduct(app, 'Products.PublicJobVacancy')
 
-class FunctionalTestCase(ptc.FunctionalTestCase):
-    """We use this class for functional integration tests that use
-    doctest syntax. Again, we can put basic common utility or setup
-    code in here.
-    """
-    layer = JobVacancyLayer
+    def setUpPloneSite(self, portal):
+        # Needed to make skins work
+        applyProfile(portal, 'Products.CMFPlone:plone')
 
-    class Session(dict):
-        def set(self, key, value):
-            self[key] = value
+        applyProfile(portal, 'Products.SimpleAttachment:default')
+        applyProfile(portal, 'Products.RichDocument:default')
+        applyProfile(portal, 'Products.PublicJobVacancy:default')
 
-    def _setup(self):
-        ptc.FunctionalTestCase._setup(self)
-        self.app.REQUEST['SESSION'] = self.Session()
+    def tearDownZope(self, app):
+        z2.uninstallProduct(app, 'Products.SimpleAttachment')
+        z2.uninstallProduct(app, 'Products.RichDocument')
+        z2.uninstallProduct(app, 'Products.PublicJobVacancy')
 
-    def afterSetUp(self):
-        roles = ('Member', 'Contributor')
-        self.portal.portal_membership.addMember('contributor',
-                                                'secret',
-                                                roles, [])
+
+PUBLICJOBVACANCY_FIXTURE = PublicJobVacancy()
+INTEGRATION_TESTING = IntegrationTesting(
+    bases=(PUBLICJOBVACANCY_FIXTURE,),
+    name="PublicJobVacancy:Integration")
+FUNCTIONAL_TESTING = FunctionalTesting(
+    bases=(PUBLICJOBVACANCY_FIXTURE,),
+    name="PublicJobVacancy:Functional")
