@@ -1,6 +1,11 @@
 Products.PublicJobVacancy Changelog
 ===================================
 
+1.4.0 (2012-09-17)
+------------------
+
+- Plone 4
+
 Products.PublicJobVacancy 1.3 (unreleased)
 ------------------------------------------
 
