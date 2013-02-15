@@ -56,6 +56,7 @@ setup(name='Products.PublicJobVacancy',
       install_requires=[
           'setuptools',
           # -*- Extra requirements: -*-
+          'Products.RichDocument',
       ],
       extras_require={
           'test': [
