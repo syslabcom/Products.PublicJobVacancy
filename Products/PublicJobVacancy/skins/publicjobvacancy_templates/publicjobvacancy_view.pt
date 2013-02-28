@@ -7,57 +7,50 @@
       i18n:domain="PublicJobVacancy">
 <body>
 
-
-
-<metal:main fill-slot="main">
+  <metal:main fill-slot="main">
     <tal:main-macro metal:define-macro="main"
-           tal:define="templateId template/getId;
-                       portal_path python: '/'.join(context.portal_url.getPortalObject().getPhysicalPath());
-                       getNameForLanguageCode nocall:here/portal_languages/getNameForLanguageCode;
-                       global purl here/portal_url;
-                       ">
+                    tal:define="templateId template/getId;
+                                portal_path python: '/'.join(context.portal_url.getPortalObject().getPhysicalPath());
+                                getNameForLanguageCode nocall:here/portal_languages/getNameForLanguageCode;
+                                global purl here/portal_url;
+                                ">
 
-        <div tal:replace="structure provider:plone.abovecontenttitle" />
+      <div tal:replace="structure provider:plone.abovecontenttitle" />
 
-        <h1 class="documentFirstHeading">
-            <metal:field use-macro="python:here.widget('title', mode='view')">
-            Title
-            </metal:field>
-        </h1>
+      <h1 class="documentFirstHeading">
+        <metal:field use-macro="python:here.widget('title', mode='view')">
+          Title
+        </metal:field>
+      </h1>
 
-        <div tal:replace="structure provider:plone.belowcontenttitle" />
+      <div tal:replace="structure provider:plone.belowcontenttitle" />
 
+      <div tal:replace="structure provider:plone.abovecontentbody" />
 
+      <div tal:define="field python:here.getField('deadline')">
+        <label tal:content="field/widget/label">label</label>:
+        <metal:field use-macro="python:here.widget('deadline', mode='view')">
+          Sector
+        </metal:field>
+      </div>
 
-        <div tal:replace="structure provider:plone.abovecontentbody" />
+      <div tal:define="field python:here.getField('author')">
+        <label tal:content="field/widget/label">label</label>:
+        <metal:field use-macro="python:here.widget('author', mode='view')">
+          Sector
+        </metal:field>
+      </div>
 
+      <div>
+        <metal:field use-macro="python:here.widget('text', mode='view')">
+          Text
+        </metal:field>
+      </div>
 
-          <div tal:define="field python:here.getField('deadline')">
-            <label tal:content="field/widget/label">label</label>:
-            <metal:field use-macro="python:here.widget('deadline', mode='view')">
-            Sector
-            </metal:field>
-          </div>
-
-           <div tal:define="field python:here.getField('author')">
-            <label tal:content="field/widget/label">label</label>:
-            <metal:field use-macro="python:here.widget('author', mode='view')">
-            Sector
-            </metal:field>
-          </div>
-
-        <div>
-            <metal:field use-macro="python:here.widget('text', mode='view')">
-            Text
-            </metal:field>
-        </div>
-
-
-        <div tal:replace="structure provider:plone.belowcontentbody" />
+      <div tal:replace="structure provider:plone.belowcontentbody" />
 
     </tal:main-macro>
 </metal:main>
 
 </body>
 </html>
- 

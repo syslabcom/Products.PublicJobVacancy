@@ -7,19 +7,18 @@
     <div metal:fill-slot="main" i18n:domain="elevateIT"
          tal:define="results python:[]">
 
-
     <tal:resultlist tal:define="view context/@@jobs_sorted_listing;
                                 resultSet view/results;
                                 plone context/@@plone;
                                 toLocalizedTime nocall:plone/toLocalizedTime">
 
-        <h1 i18n:translate="heading_job_vacancies_archive">Job vacancies archive</h1>
+        <h1 i18n:translate="heading_job_vacancies_archive">
+          Job vacancies archive</h1>
 
         <a href="" i18n:translate="link_back_to_current_jobs"
            class="link-parent"
-           tal:attributes="href string:jobs_listing"
-           >
-        Back to current job vacancies
+           tal:attributes="href string:jobs_listing">
+          Back to current job vacancies
         </a>
 
         <metal:block define-macro="listings"
@@ -27,7 +26,8 @@
 
         <tal:block condition="results">
 
-            <h2 i18n:translate="heading_job_vacancies_processed">Processed job vacancies</h2>
+            <h2 i18n:translate="heading_job_vacancies_processed">
+              Processed job vacancies</h2>
             <metal:block use-macro="here/jobs_listing/macros/listing" />
         </tal:block>
 
