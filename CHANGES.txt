@@ -1,10 +1,21 @@
 Products.PublicJobVacancy Changelog
 ===================================
 
+
 1.4.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- make deadline field required on PublicJobVacancy type
+  [jcerjak]
+
+- specify Products.RichDocument as a dependency and install it automatically
+  [jcerjak]
+
+- properly register skin resources
+  [jcerjak]
+
+- code cleanup
+  [jcerjak]
 
 
 1.4.0 (2012-09-17)
@@ -12,24 +23,28 @@ Products.PublicJobVacancy Changelog
 
 - Plone 4
 
-Products.PublicJobVacancy 1.3 (unreleased)
-------------------------------------------
+
+1.3 (unreleased)
+----------------
 
 - Added EUPL license (deroiste)
 
-Products.PublicJobVacancy 1.2 (2009-05-19)
-------------------------------------------
+
+1.2 (2009-05-19)
+----------------
 
 - added tests (thomas)
 
 - cleanup (thomas)
 
-Products.PublicJobVacancy 1.1 (2009-05-12)
-------------------------------------------
+
+1.1 (2009-05-12)
+----------------
 
 - Packaged egg (pilz)
 
-Products.PublicJobVacancy 1.0 (2008-03-31)
-------------------------------------------
+
+1.0 (2008-03-31)
+----------------
 
 - Initial port
