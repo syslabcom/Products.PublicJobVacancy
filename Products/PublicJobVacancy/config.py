@@ -38,9 +38,6 @@ __docformat__ = 'plaintext'
 # will be included (by importing) in this file if found.
 
 from Products.CMFCore.permissions import setDefaultRoles
-##code-section config-head #fill in your manual code here
-##/code-section config-head
-
 
 PROJECTNAME = "PublicJobVacancy"
 
@@ -57,9 +54,6 @@ DEPENDENCIES = []
 # Dependend products - not quick-installed - used in testcase
 # override in custom configuration
 PRODUCT_DEPENDENCIES = []
-
-##code-section config-bottom #fill in your manual code here
-##/code-section config-bottom
 
 
 # Load custom configuration not managed by archgenxml

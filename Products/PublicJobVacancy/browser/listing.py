@@ -1,11 +1,10 @@
-from Products.PublicJobVacancy.browser.interfaces import IJobsListing
-from Products.CMFCore.utils import getToolByName
-
-from zope.interface import implements
-from Products.Five.browser import BrowserView
+from Acquisition import aq_base
 from DateTime import DateTime
 from DocumentTemplate import sequence
-from Acquisition import aq_base
+from Products.CMFCore.utils import getToolByName
+from Products.Five.browser import BrowserView
+from Products.PublicJobVacancy.browser.interfaces import IJobsListing
+from zope.interface import implements
 
 
 class JobsSortedListing(BrowserView):

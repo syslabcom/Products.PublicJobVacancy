@@ -2,12 +2,6 @@
 
 from zope.interface import Interface
 
-##code-section HEAD
-##/code-section HEAD
 
 class IPublicJobVacancy(Interface):
-    """Marker interface for .PublicJobVacancy.PublicJobVacancy
-    """
-
-##code-section FOOT
-##/code-section FOOT
+    """Marker interface for .PublicJobVacancy.PublicJobVacancy"""

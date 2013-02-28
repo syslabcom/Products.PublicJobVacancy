@@ -25,7 +25,8 @@ from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 from Products.PublicJobVacancy.config import *
 
 from Products.RichDocument.content.richdocument import RichDocument
-from Products.RichDocument.content.richdocument import RichDocumentSchema as BaseSchema
+from Products.RichDocument.content.richdocument import \
+    RichDocumentSchema as BaseSchema
 from Products.ATContentTypes.content.schemata import finalizeATCTSchema
 
 if HAS_LINGUAPLONE:
@@ -72,20 +73,14 @@ schema = Schema((
 ),
 )
 
-##code-section after-local-schema #fill in your manual code here
-##/code-section after-local-schema
 
-PublicJobVacancy_schema = BaseSchema.copy() + \
-    schema.copy()
-
-##code-section after-schema #fill in your manual code here
+PublicJobVacancy_schema = BaseSchema.copy() + schema.copy()
 finalizeATCTSchema(PublicJobVacancy_schema)
-#PublicJobVacancy_schema.moveField('
-##/code-section after-schema
+
 
 class PublicJobVacancy(BrowserDefaultMixin, BaseContent, RichDocument):
-    """
-    """
+    """Public Job Vacancy type"""
+
     security = ClassSecurityInfo()
     implements(IPublicJobVacancy)
     meta_type = 'PublicJobVacancy'
@@ -93,14 +88,5 @@ class PublicJobVacancy(BrowserDefaultMixin, BaseContent, RichDocument):
 
     schema = PublicJobVacancy_schema
 
-    ##code-section class-header #fill in your manual code here
-    ##/code-section class-header
-
-    # Methods
-
 
 registerType(PublicJobVacancy, PROJECTNAME)
-# end of class PublicJobVacancy
-
-##code-section module-footer #fill in your manual code here
-##/code-section module-footer

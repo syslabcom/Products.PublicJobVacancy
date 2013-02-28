@@ -53,12 +53,6 @@ from Products.CMFCore import utils as cmfutils
 from Products.CMFPlone.utils import ToolInit
 from config import *
 
-DirectoryView.registerDirectory('skins', product_globals)
-
-
-##code-section custom-init-head #fill in your manual code here
-##/code-section custom-init-head
-
 
 def initialize(context):
     """initialize product (called by zope)"""
@@ -82,8 +76,6 @@ def initialize(context):
         fti=ftis,
         ).initialize(context)
 
-    ##code-section custom-init-bottom #fill in your manual code here
-    ##/code-section custom-init-bottom
 
 from zope.i18nmessageid import MessageFactory
 JobMessageFactory = MessageFactory('PublicJobVacancy')
