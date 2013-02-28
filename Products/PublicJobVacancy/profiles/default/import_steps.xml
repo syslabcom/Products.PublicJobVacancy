@@ -1,34 +1,32 @@
 <?xml version="1.0"?>
 <import-steps>
 
-<import-step 
-    id="PublicJobVacancy-GS-dependencies" 
-    handler="Products.PublicJobVacancy.setuphandlers.installGSDependencies"
-    title="Dependend GS profiles for PublicJobVacancy"
-    version="2007-11-01T16:13:23.149913">
-   <dependency step="plone-final"/>
-   Install Generic Setup profile dependencies for PublicJobVacancy
- </import-step>
+  <import-step
+      id="PublicJobVacancy-GS-dependencies"
+      handler="Products.PublicJobVacancy.setuphandlers.installGSDependencies"
+      title="Dependend GS profiles for PublicJobVacancy"
+      version="2007-11-01T16:13:23.149913">
+    <dependency step="plone-final"/>
+    Install Generic Setup profile dependencies for PublicJobVacancy
+  </import-step>
 
- <import-step 
-    id="PublicJobVacancy-QI-dependencies" 
-    handler="Products.PublicJobVacancy.setuphandlers.installQIDependencies"
-    title="Dependend QI installables for PublicJobVacancy"
-    version="2007-11-01T16:13:23.149913">
-   <dependency step="2007-11-01T16:13:23.149913-GS-dependencies"/>
-   Install quickinstaller dependencies for PublicJobVacancy
- </import-step>
- 
-     
-<!-- ##code-section ADDITIONALSTEPS -->
- <import-step
-    id="PublicJobVacancy-Attachment-support"
-    handler="Products.PublicJobVacancy.setuphandlers.installAttachmentSupport"
-    title="Additional setup to ensure Attachment handling works"
-    version="2007-11-01T14:50:38.642264">
-      Set up handling of attachments for PublicJobVacancy
- </import-step>
-<!-- ##/code-section ADDITIONALSTEPS --> 
+  <import-step
+      id="PublicJobVacancy-QI-dependencies"
+      handler="Products.PublicJobVacancy.setuphandlers.installQIDependencies"
+      title="Dependend QI installables for PublicJobVacancy"
+      version="2007-11-01T16:13:23.149913">
+    <dependency step="2007-11-01T16:13:23.149913-GS-dependencies"/>
+    Install quickinstaller dependencies for PublicJobVacancy
+  </import-step>
+
+  <!-- ##code-section ADDITIONALSTEPS -->
+  <import-step
+      id="PublicJobVacancy-Attachment-support"
+      handler="Products.PublicJobVacancy.setuphandlers.installAttachmentSupport"
+      title="Additional setup to ensure Attachment handling works"
+      version="2007-11-01T14:50:38.642264">
+    Set up handling of attachments for PublicJobVacancy
+  </import-step>
+  <!-- ##/code-section ADDITIONALSTEPS -->
 
 </import-steps>
- 
