@@ -1,9 +1,12 @@
 <configure xmlns="http://namespaces.zope.org/zope"
            xmlns:browser="http://namespaces.zope.org/browser"
-           xmlns:five="http://namespaces.zope.org/five">
-  
+           xmlns:five="http://namespaces.zope.org/five"
+           xmlns:cmf="http://namespaces.zope.org/cmf">
+
   <include file="profiles.zcml" />
-    
-   <include package=".browser" />
+  <include package=".browser" />
+
+  <!-- Register skins directory -->
+  <cmf:registerDirectory name="skins" directory="skins" recursive="True" />
 
 </configure>
