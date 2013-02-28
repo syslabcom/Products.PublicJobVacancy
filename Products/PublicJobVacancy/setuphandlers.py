@@ -32,10 +32,10 @@ import logging
 logger = logging.getLogger('PublicJobVacancy: setuphandlers')
 from config import DEPENDENCIES
 from Products.CMFCore.utils import getToolByName
-##code-section HEAD
-from Products.SimpleAttachment.setuphandlers import registerImagesFormControllerActions
-from Products.SimpleAttachment.setuphandlers import registerAttachmentsFormControllerActions
-##/code-section HEAD
+from Products.SimpleAttachment.setuphandlers import \
+    registerImagesFormControllerActions
+from Products.SimpleAttachment.setuphandlers import \
+    registerAttachmentsFormControllerActions
 
 
 def installGSDependencies(context):
@@ -93,7 +93,6 @@ def installQIDependencies(context):
             qi.installProducts([dependency])
 
 
-##code-section FOOT
 def installAttachmentSupport(context):
     """ install attachment handlers """
     site = context.getSite()
@@ -108,4 +107,3 @@ def installAttachmentSupport(context):
         site, contentType='PublicJobVacancy', template='translate_item')
     registerImagesFormControllerActions(
         site, contentType='PublicJobVacancy', template='translate_item')
-##/code-section FOOT
