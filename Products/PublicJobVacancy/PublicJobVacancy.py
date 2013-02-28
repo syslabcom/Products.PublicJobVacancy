@@ -49,6 +49,7 @@ schema = Schema((
 
     DateTimeField(
         name='deadline',
+        required=True,
         widget=CalendarWidget(
             size="CalendarWidget",
             label=_(u'job_deadline_label', default="Deadline"),
