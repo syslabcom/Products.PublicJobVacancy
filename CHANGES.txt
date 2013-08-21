@@ -2,6 +2,12 @@ Products.PublicJobVacancy Changelog
 ===================================
 
 
+1.4.2 (unreleased)
+------------------
+
+- Nothing changed yet.
+
+
 1.4.1 (2013-08-21)
 ------------------
 
