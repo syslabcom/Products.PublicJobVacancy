@@ -2,7 +2,7 @@ Products.PublicJobVacancy Changelog
 ===================================
 
 
-1.4.1 (unreleased)
+1.4.1 (2013-08-21)
 ------------------
 
 - make deadline field required on PublicJobVacancy type
